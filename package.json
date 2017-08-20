@@ -95,6 +95,11 @@
             "type": "object",
             "title": "Rust configuration",
             "properties": {
+                "rust-client.showStdOut": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Specifies whether RLS stdout will be shown in the output channel along with protocol logs. Requires reloading extension after change."
+                },
                 "rust-client.showStdErr": {
                     "type": "boolean",
                     "default": false,

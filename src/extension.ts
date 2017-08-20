@@ -83,6 +83,19 @@ function makeRlsProcess(lcOutputChannel: OutputChannel | null): Promise<child_pr
             });
         }
 
+        if (CONFIGURATION.showStdoutInOutputChannel) {
+            childProcess.stdout.on('data', data => {
+                if (lcOutputChannel) {
+                    lcOutputChannel.append(
+                        (is.string(data) ? data : data.toString('utf8')) + "\n"
+                    );
+                    // With regards to focusing the output channel, treat RLS stderr
+                    // as if it was of an RevealOutputChannelOn.Info severity
+                    lcOutputChannel.show(true);
+                }
+            });
+        }
+
         if (CONFIGURATION.showStderrInOutputChannel) {
             childProcess.stderr.on('data', data => {
                 if (lcOutputChannel) {
